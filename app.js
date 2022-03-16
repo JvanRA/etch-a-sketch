@@ -1,11 +1,20 @@
-const sketchContainer = document.querySelector('.sketchContainer');
+const grid = document.getElementById('grid');
+const resetBtn = document.getElementById('resetBtn');
+let allUnits = document.getElementById('grid').childNodes;
 
 for (let i=0; i<256; i++) {
-    const pixel = document.createElement('div');
-    pixel.classList.add('pixel-element');
-    pixel.addEventListener('click', () => {
-        pixel.style.backgroundColor = 'black';
+    const div = document.createElement('div');
+    div.classList.add('unit');
+    div.addEventListener('mouseover', () => {
+        div.style.backgroundColor = 'black';
     })
-    sketchContainer.append(pixel);
+    grid.append(div);
 }
 
+function reset() {
+    for(let i=0; i < allUnits.length; i++) {
+        allUnits[i].style.backgroundColor = 'white';
+    }
+}
+
+resetBtn.addEventListener('click', reset);
