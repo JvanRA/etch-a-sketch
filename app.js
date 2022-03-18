@@ -1,20 +1,39 @@
-const grid = document.getElementById('grid');
+let grid = document.getElementById('grid');
 const resetBtn = document.getElementById('resetBtn');
+let inputRange = document.querySelector('input');
+let gridValue = document.querySelector('.grid-value');
+let applyChange = document.querySelector('.apply');
 let allUnits = document.getElementById('grid').childNodes;
+let size = 16;
 
-for (let i=0; i<256; i++) {
-    const div = document.createElement('div');
-    div.classList.add('unit');
-    div.addEventListener('mouseover', () => {
-        div.style.backgroundColor = 'black';
-    })
+createDiv();
+
+function createDiv(divAmount) {
+    grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+    grid.style.gridTemplateRows = `repeat(${size}, 1fr)`;
+    for (let i=0; i<size*size; i++) {
+        const div = document.createElement('div');
+        div.addEventListener('mouseover', () => {
+            div.style.backgroundColor = 'black';
+        })
     grid.append(div);
-}
+    }
+};
+
+inputRange.addEventListener('input', function(e) {
+    size = e.target.value;
+    gridValue.textContent = `${size}x${size}`;
+});
+
+applyChange.addEventListener('click', () => {
+    reset();
+});
 
 function reset() {
-    for(let i=0; i < allUnits.length; i++) {
-        allUnits[i].style.backgroundColor = 'white';
+    while (grid.firstChild) {
+        grid.removeChild(grid.lastChild);
     }
+    createDiv();
 }
 
 resetBtn.addEventListener('click', reset);

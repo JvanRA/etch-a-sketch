@@ -13,6 +13,7 @@ h1 {
     display: grid;
     grid-gap: 1px;
     grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr);
     width: 700px;
     height: 700px;
     padding: 1px;
